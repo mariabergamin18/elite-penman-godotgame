@@ -44,4 +44,4 @@ Caso vença, o jogador recebe um certificado virtual de **"Escriba de Elite"**.
 
 ---
 
-**"Escriba de Elite"** é um jogo dinâmico e educativo que desafia a velocidade e precisão do jogador enquanto proporciona uma experiência divertida e imersiva!
+**"Elite Penman"** é um jogo dinâmico e educativo que desafia a velocidade e precisão do jogador enquanto proporciona uma experiência divertida e imersiva!
