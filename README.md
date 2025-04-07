@@ -1,5 +1,5 @@
 # Nome do Jogo
-**"Escriba de Elite"**
+**"Elite Penman"**
 
 ## Estória
 O jogador assume o papel de um aspirante a escriba medieval que deseja conseguir um emprego em uma renomada corte real. Para provar sua habilidade, ele deve enfrentar um rigoroso treinamento que envolve testar sua velocidade e precisão na digitação de palavras e frases enquanto derrota inimigos metafóricos que representam os desafios da profissão. Ao final, ele deve enfrentar o grande desafio: um chefão que simboliza a entrevista final para o cargo.
