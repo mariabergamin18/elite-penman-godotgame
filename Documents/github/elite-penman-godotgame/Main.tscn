@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/kenney_platformer-pack-redux/PNG/Backgrounds/blue_grass.png" type="Texture" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=4]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="SpawnContainer" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1109.57, 43.8153 )
+
+[node name="Position2D2" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1109.57, 166.807 )
+
+[node name="Position2D3" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1108.46, 292.015 )
+
+[node name="Position2D4" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1107.35, 415.007 )
+
+[node name="Position2D5" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1107.35, 540.946 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1110.0
+margin_bottom = 641.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
