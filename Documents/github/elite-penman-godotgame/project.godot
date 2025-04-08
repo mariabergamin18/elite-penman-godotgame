@@ -15,9 +15,13 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Typing_Game"
+config/name="Elite_Penman"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+PromptList="*res://PromptList.gd"
 
 [rendering]
 

@@ -9,22 +9,22 @@ script = ExtResource( 4 )
 [node name="SpawnContainer" type="Node2D" parent="."]
 
 [node name="Position2D" type="Position2D" parent="SpawnContainer"]
-position = Vector2( 1109.57, 43.8153 )
+position = Vector2( 1073.38, 77.4165 )
 
 [node name="Position2D2" type="Position2D" parent="SpawnContainer"]
-position = Vector2( 1109.57, 166.807 )
+position = Vector2( 1073.38, 169.392 )
 
 [node name="Position2D3" type="Position2D" parent="SpawnContainer"]
-position = Vector2( 1108.46, 292.015 )
+position = Vector2( 1073.38, 277.952 )
 
 [node name="Position2D4" type="Position2D" parent="SpawnContainer"]
-position = Vector2( 1107.35, 415.007 )
+position = Vector2( 1073.38, 386.126 )
 
 [node name="Position2D5" type="Position2D" parent="SpawnContainer"]
-position = Vector2( 1107.35, 540.946 )
+position = Vector2( 1073.38, 494.956 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 1110.0
+margin_right = 1052.0
 margin_bottom = 641.0
 texture = ExtResource( 1 )
 expand = true
@@ -36,5 +36,5 @@ __meta__ = {
 [node name="EnemyContainer" type="Node2D" parent="."]
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
