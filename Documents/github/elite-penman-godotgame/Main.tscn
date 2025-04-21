@@ -1,7 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/kenney_platformer-pack-redux/PNG/Backgrounds/blue_grass.png" type="Texture" id=1]
+[ext_resource path="res://Metamorphous-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 28
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 338.658 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -39,6 +55,108 @@ __meta__ = {
 wait_time = 5.0
 
 [node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 10.0
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOVerScreen" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GameOVerScreen"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOVerScreen/CenterContainer"]
+margin_left = 362.0
+margin_top = 224.0
+margin_right = 647.0
+margin_bottom = 362.0
+custom_constants/separation = 50
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer"]
+margin_right = 285.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 3 )
+text = "GAME OVER ;("
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer"]
+margin_top = 96.0
+margin_right = 285.0
+margin_bottom = 138.0
+custom_fonts/font = SubResource( 4 )
+text = "REINICIAR"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRow2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 36.0
+
+[node name="TopRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/TopRow2"]
+margin_left = 354.0
+margin_right = 669.0
+margin_bottom = 36.0
+
+[node name="EnemiesKilledLabel" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow"]
+margin_right = 292.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "Inimigos vencidos: "
+
+[node name="EnemiesKilledValue" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow"]
+margin_left = 296.0
+margin_right = 315.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="MiddleRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 1024.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+
+[node name="BottomRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_top = 564.0
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
+margin_right = 207.0
+margin_bottom = 36.0
+
+[node name="DifficultyLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/HBoxContainer"]
+margin_right = 184.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "Dificuldade: "
+
+[node name="DifficultyValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/HBoxContainer"]
+margin_left = 188.0
+margin_right = 207.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="LoseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseArea"]
+position = Vector2( -10.4281, 331.87 )
+shape = SubResource( 2 )
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
+[connection signal="pressed" from="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="body_entered" from="LoseArea" to="." method="_on_LoseArea_body_entered"]
