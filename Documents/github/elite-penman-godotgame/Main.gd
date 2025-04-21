@@ -9,6 +9,8 @@ onready var spawn_timer = $SpawnTimer
 var active_enemy = null
 var current_letter_index : int = -1
 
+var difficulty: int = 0
+
 func _ready() -> void:
 	randomize()
 	spawn_timer.start()
@@ -58,3 +60,13 @@ func spawn_enemy():
 	var index = randi() % spawns.size()
 	enemy_container.add_child(enemy_instance)
 	enemy_instance.global_position = spawns[index].global_position
+	enemy_instance.set_difficulty(difficulty)
+
+func _on_DifficultyTimer_timeout():
+	difficulty += 1
+	GlobalSignals.emit_signal("difficulty_increased", difficulty)
+	print("Difficulty increased to %d " % difficulty)
+	var new_wait_time = spawn_timer.wait_time -0.2
+	spawn_timer.wait_time = clamp(new_wait_time, 1, spawn_timer.wait_time)
+
+
