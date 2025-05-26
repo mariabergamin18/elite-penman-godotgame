@@ -4,19 +4,19 @@
 [ext_resource path="res://Metamorphous-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 36
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 28
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 28
 font_data = ExtResource( 2 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 10, 338.658 )
 
 [node name="Main" type="Node2D"]
@@ -73,6 +73,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
 margin_bottom = 593.0
+mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOVerScreen/CenterContainer"]
 margin_left = 362.0
@@ -84,19 +85,20 @@ custom_constants/separation = 50
 [node name="Label" type="Label" parent="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer"]
 margin_right = 285.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "GAME OVER ;("
 
 [node name="RestartButton" type="Button" parent="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer"]
 margin_top = 96.0
 margin_right = 285.0
 margin_bottom = 138.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "REINICIAR"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,6 +106,7 @@ __meta__ = {
 [node name="TopRow2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
 margin_right = 1024.0
 margin_bottom = 36.0
+mouse_filter = 2
 
 [node name="TopRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/TopRow2"]
 margin_left = 354.0
@@ -113,49 +116,56 @@ margin_bottom = 36.0
 [node name="EnemiesKilledLabel" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow"]
 margin_right = 292.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Inimigos vencidos: "
 
 [node name="EnemiesKilledValue" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow"]
 margin_left = 296.0
 margin_right = 315.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0"
 
 [node name="MiddleRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 margin_top = 40.0
 margin_right = 1024.0
 margin_bottom = 560.0
+mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="BottomRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 margin_top = 564.0
 margin_right = 1024.0
 margin_bottom = 600.0
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
-margin_right = 207.0
+margin_right = 225.0
 margin_bottom = 36.0
+mouse_filter = 2
 
 [node name="DifficultyLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/HBoxContainer"]
-margin_right = 184.0
+margin_right = 202.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
-text = "Dificuldade: "
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "  Dificuldade: "
 
 [node name="DifficultyValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/HBoxContainer"]
-margin_left = 188.0
-margin_right = 207.0
+margin_left = 206.0
+margin_right = 225.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0"
 
 [node name="LoseArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LoseArea"]
 position = Vector2( -10.4281, 331.87 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="pressed" from="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]

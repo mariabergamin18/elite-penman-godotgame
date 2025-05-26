@@ -68,7 +68,13 @@ func spawn_enemy():
 	enemy_container.add_child(enemy_instance)
 	enemy_instance.set_difficulty(difficulty)
 
-func _on_DifficultyTimer_timeout():
+func _on_DifficultyTimer_timeout() -> void:
+	if difficulty >= 20:
+		difficulty_timer.stop()
+		difficulty = 20
+		return 
+	
+	
 	difficulty += 1
 	GlobalSignals.emit_signal("difficulty_increased", difficulty)
 	print("Difficulty increased to %d " % difficulty)
@@ -98,6 +104,8 @@ func start_game():
 	game_over_screen.hide()
 	difficulty = 0
 	enemies_killed = 0
+	difficulty_value.text = str(0)
+	killed_value.text = str(0)
 	randomize()
 	spawn_timer.start()
 	difficulty_timer.start()
