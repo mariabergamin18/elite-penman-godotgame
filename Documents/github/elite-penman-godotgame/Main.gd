@@ -2,6 +2,7 @@ extends Node2D
 
 var Enemy = preload("res://Enemy.tscn")
 
+onready var music_playing = $AudioStreamPlayer2D
 onready var enemy_container = $EnemyContainer
 onready var spawn_container = $SpawnContainer
 onready var spawn_timer = $SpawnTimer
@@ -91,6 +92,9 @@ func _on_LoseArea_body_entered(body):
 
 
 func game_over():
+	var musica_game_over = preload("res://Assets/Music/Game_over_soundtrack-Death-Is-Just-Another-Path.wav")
+	music_playing.stream = musica_game_over
+	music_playing.play()
 	game_over_screen.show()
 	spawn_timer.stop()
 	difficulty_timer.stop()
@@ -114,4 +118,8 @@ func start_game():
 
 
 func _on_RestartButton_pressed():
+	var main_music = preload("res://Assets/Music/Main_soundtrack a_knights_challenge.wav")
+	$AudioStreamPlayer2D.stream = main_music
+	$AudioStreamPlayer2D.play()
 	start_game()
+	
