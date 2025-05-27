@@ -8,6 +8,9 @@ onready var spawn_container = $SpawnContainer
 onready var spawn_timer = $SpawnTimer
 onready var difficulty_timer = $DifficultyTimer
 
+onready var sfx_enemy_hit = $Knight/sfx_enemy_hit
+onready var sfx_enemy_killed = $Knight/sfx_enemy_killed
+
 onready var difficulty_value = $CanvasLayer/VBoxContainer/BottomRow/HBoxContainer/DifficultyValue
 onready var killed_value = $CanvasLayer/VBoxContainer/TopRow2/TopRow/EnemiesKilledValue
 onready var game_over_screen = $CanvasLayer/GameOVerScreen
@@ -35,6 +38,7 @@ func find_new_active_enemy(typed_character: String):
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
+		sfx_enemy_hit.play()
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
 
@@ -48,6 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				current_letter_index += 1
 				active_enemy.set_next_character(current_letter_index)
 				if current_letter_index == prompt.length():
+					sfx_enemy_killed.play()
 					print("done")
 					current_letter_index = -1
 					active_enemy.queue_free()
