@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://Assets/Backgrounds/castle_backround.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Backgrounds/castle_bg.jpg" type="Texture" id=1]
 [ext_resource path="res://Metamorphous-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Music/Main_soundtrack a_knights_challenge.wav" type="AudioStream" id=3]
 [ext_resource path="res://Main.gd" type="Script" id=4]
@@ -8,13 +8,23 @@
 [ext_resource path="res://Assets/SpriteSheets/ATTACK 1.png" type="Texture" id=6]
 [ext_resource path="res://Assets/SFX/sfx_enemy_hit.wav" type="AudioStream" id=7]
 [ext_resource path="res://Assets/SFX/enemy_killed_sfx.wav" type="AudioStream" id=8]
+[ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Backgrounds/gameover_background.jpg" type="Texture" id=10]
 
-[sub_resource type="DynamicFont" id=1]
-size = 36
-font_data = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.317647, 0.0823529, 0.0823529, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2( 2, -2 )
+anti_aliasing_size = 5
 
 [sub_resource type="DynamicFont" id=2]
-size = 28
+size = 26
+outline_color = Color( 0.388235, 0.0745098, 0.0745098, 1 )
+use_filter = true
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -105,39 +115,69 @@ autostart = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameOVerScreen" type="PanelContainer" parent="CanvasLayer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -691.0
+margin_top = -391.0
+margin_right = 691.0
+margin_bottom = 391.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GameOVerScreen"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1375.0
+margin_bottom = 775.0
+texture = ExtResource( 10 )
+stretch_mode = 6
+
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GameOVerScreen"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 593.0
+margin_right = 1375.0
+margin_bottom = 775.0
 mouse_filter = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOVerScreen/CenterContainer"]
-margin_left = 362.0
-margin_top = 224.0
-margin_right = 647.0
-margin_bottom = 362.0
-custom_constants/separation = 50
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GameOVerScreen/CenterContainer"]
+margin_left = 414.0
+margin_top = 367.0
+margin_right = 954.0
+margin_bottom = 401.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+custom_constants/separation = 180
 
-[node name="Label" type="Label" parent="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer"]
-margin_right = 285.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 1 )
-text = "GAME OVER ;("
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/GameOVerScreen/CenterContainer/HBoxContainer"]
+margin_right = 210.0
+margin_bottom = 34.0
+rect_clip_content = true
+focus_neighbour_left = NodePath("../RestartButton")
+focus_neighbour_right = NodePath("../RestartButton")
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "MENU INICIAL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="RestartButton" type="Button" parent="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer"]
-margin_top = 96.0
-margin_right = 285.0
-margin_bottom = 138.0
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOVerScreen/CenterContainer/HBoxContainer"]
+margin_left = 390.0
+margin_right = 540.0
+margin_bottom = 34.0
+rect_clip_content = true
+focus_neighbour_left = NodePath("../MainMenuButton")
+focus_neighbour_right = NodePath("../MainMenuButton")
+custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "REINICIAR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -213,27 +253,44 @@ text = "0"
 position = Vector2( -10.4281, 331.87 )
 shape = SubResource( 4 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="main_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
-bus = "music"
 
 [node name="Knight" type="AnimatedSprite" parent="."]
-position = Vector2( 66.2837, 434.987 )
-scale = Vector2( 2.12653, 2.12653 )
+position = Vector2( 109.455, 471.617 )
+scale = Vector2( 2.77156, 2.88966 )
 frames = SubResource( 11 )
 animation = "attack"
-frame = 4
+frame = 3
 playing = true
 
 [node name="sfx_enemy_hit" type="AudioStreamPlayer2D" parent="Knight"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="sfx_enemy_killed" type="AudioStreamPlayer2D" parent="Knight"]
 stream = ExtResource( 8 )
 volume_db = 10.0
+bus = "Sfx"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseMenu" parent="Control" instance=ExtResource( 9 )]
+margin_left = 101.561
+margin_top = -19.1663
+margin_right = 1125.56
+margin_bottom = 580.834
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
-[connection signal="pressed" from="CanvasLayer/GameOVerScreen/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOVerScreen/CenterContainer/HBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOVerScreen/CenterContainer/HBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="body_entered" from="LoseArea" to="." method="_on_LoseArea_body_entered"]

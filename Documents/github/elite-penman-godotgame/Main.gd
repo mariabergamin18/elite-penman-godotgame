@@ -2,7 +2,8 @@ extends Node2D
 
 var Enemy = preload("res://Enemy.tscn")
 
-onready var music_playing = $AudioStreamPlayer2D
+
+onready var music_playing = $main_music
 onready var enemy_container = $EnemyContainer
 onready var spawn_container = $SpawnContainer
 onready var spawn_timer = $SpawnTimer
@@ -38,7 +39,6 @@ func find_new_active_enemy(typed_character: String):
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
-		sfx_enemy_hit.play()
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
 
@@ -52,13 +52,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				current_letter_index += 1
 				active_enemy.set_next_character(current_letter_index)
 				if current_letter_index == prompt.length():
-					sfx_enemy_killed.play()
 					print("done")
 					current_letter_index = -1
 					active_enemy.queue_free()
 					active_enemy = null
 					enemies_killed += 1
-					killed_value.text = str(enemies_killed) 
+					killed_value.text = str(enemies_killed)
+					sfx_enemy_hit.play()
 			else:
 				print("incorrectly typed %s instead of %s" % [key_typed, next_character])
 
@@ -124,7 +124,11 @@ func start_game():
 
 func _on_RestartButton_pressed():
 	var main_music = preload("res://Assets/Music/Main_soundtrack a_knights_challenge.wav")
-	$AudioStreamPlayer2D.stream = main_music
-	$AudioStreamPlayer2D.play()
+	$main_music.stream = main_music
+	$main_music.play()
 	start_game()
 	
+
+
+func _on_MainMenuButton_pressed():
+	get_tree().change_scene("res://Menu.tscn")

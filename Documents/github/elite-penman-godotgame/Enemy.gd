@@ -9,6 +9,8 @@ export (float) var speed = 0.5
 onready var prompt = $RichTextLabel
 onready var prompt_text = prompt.text
 
+onready var enemy = $Enemy
+
 func _ready() -> void:
 	prompt_text = PromptList.get_prompt()
 	prompt.parse_bbcode(set_center_tags(prompt_text))
@@ -47,3 +49,6 @@ func get_bbcode_color_tag(color: Color) -> String:
 
 func get_bbcode_end_color_tag() -> String:
 	return "[/color]"
+
+func set_killed_animation():
+	enemy.play("killed")

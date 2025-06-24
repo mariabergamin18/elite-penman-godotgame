@@ -1,7 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Music/Menu_soundtrack-Woodland-Fantasy.wav" type="AudioStream" id=2]
+[ext_resource path="res://volume_slider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Backgrounds/splash_screen.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Fonts/Augusta.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/Backgrounds/parchment_backgroud.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 34
+outline_size = 1
+outline_color = Color( 0.286275, 0.156863, 0.192157, 1 )
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 706, 871 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+use_filter = true
+font_data = ExtResource( 5 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -11,40 +41,174 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -34.0
-margin_top = -34.0
-margin_right = 34.0
-margin_bottom = 34.0
+margin_left = -38.3499
+margin_top = -13.2978
+margin_right = 84.6501
+margin_bottom = 126.702
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-margin_right = 68.0
-margin_bottom = 20.0
+margin_right = 123.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 1 )
 text = "Começar"
+flat = true
 
 [node name="OptionButton" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 68.0
-margin_bottom = 44.0
+margin_top = 48.0
+margin_right = 123.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 1 )
 text = "Opções"
+flat = true
+
+[node name="OptionPopUp" type="Control" parent="VBoxContainer/OptionButton"]
+margin_left = 72.4979
+margin_top = 10.3011
+margin_right = 72.4979
+margin_bottom = 10.3011
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/OptionButton/OptionPopUp"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -156.347
+margin_top = -112.314
+margin_right = 138.653
+margin_bottom = 181.686
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer"]
+margin_right = 295.0
+margin_bottom = 294.0
+custom_constants/separation = 30
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="master" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 61.0
+margin_right = 295.0
+margin_bottom = 77.0
+max_value = 1.0
+step = 0.1
+tick_count = 10
+bus_name = "Master"
+
+[node name="master_label" type="Label" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer/master"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -81.5492
+margin_top = -25.3373
+margin_right = 71.4508
+margin_bottom = -13.3373
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.12549, 0.117647, 0.176471, 1 )
+text = "Volume principal"
+align = 3
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="music" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 107.0
+margin_right = 295.0
+margin_bottom = 123.0
+max_value = 1.0
+step = 0.1
+tick_count = 10
+bus_name = "Music"
+
+[node name="music_label" type="Label" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer/music"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -31.6383
+margin_top = -28.1258
+margin_right = 36.3617
+margin_bottom = -16.1258
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.12549, 0.117647, 0.176471, 1 )
+text = "Musica"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="sfx" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 153.0
+margin_right = 295.0
+margin_bottom = 169.0
+max_value = 1.0
+step = 0.1
+tick_count = 10
+bus_name = "Sfx"
+
+[node name="sfx_label" type="Label" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer/sfx"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -58.1383
+margin_top = -28.1258
+margin_right = 82.8617
+margin_bottom = -16.1258
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.12549, 0.117647, 0.176471, 1 )
+text = "Efeitos sonoros"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Close" type="Button" parent="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer"]
+margin_top = 199.0
+margin_right = 295.0
+margin_bottom = 233.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.121569, 0.113725, 0.176471, 1 )
+text = "Voltar"
+flat = true
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
-margin_right = 68.0
-margin_bottom = 68.0
+show_behind_parent = true
+margin_top = 96.0
+margin_right = 123.0
+margin_bottom = 140.0
+custom_fonts/font = SubResource( 1 )
+shortcut_in_tooltip = false
 text = "Sair"
+flat = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="menu_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
-bus = "music"
+bus = "Music"
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionButton/OptionPopUp/PanelContainer/VBoxContainer/Close" to="." method="_on_Close_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

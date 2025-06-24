@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Backgrounds/parchment_backgroud.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/Augusta.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://PauseMenu.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 706, 871 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -284.0
+margin_top = -103.0
+margin_right = 34.0
+margin_bottom = 148.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_right = 318.0
+margin_bottom = 251.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 318.0
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Voltar"
+flat = true
+
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 318.0
+margin_bottom = 142.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Recomeçar"
+flat = true
+
+[node name="QuitGame" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 162.0
+margin_right = 318.0
+margin_bottom = 196.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Sair do jogo"
+flat = true
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitGame" to="." method="_on_QuitGame_pressed"]
